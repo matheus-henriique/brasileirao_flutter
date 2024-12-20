@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "app_test_build",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
