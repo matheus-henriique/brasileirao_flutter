@@ -1,3 +1,5 @@
+import 'package:app_test_build/models/time.dart';
+import 'package:app_test_build/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>{
-
+  HomeController homeController = HomeController();
 
   @override
   Widget build(BuildContext context0){
@@ -21,11 +23,20 @@ class _HomePageState extends State<HomePage>{
         ),
         backgroundColor: Colors.purple,
       ),
-      body: Column(
-        children: [
-          // ListView.separated(itemBuilder: ["Nome"], separatorBuilder: separatorBuilder, itemCount: itemCount)
-        ],
-      ),
+      body: ListView.separated(
+        itemBuilder: (BuildContext context, int i){
+          final tabela = HomeController().tabela;
+
+          return ListTile(
+            leading: Image.network(tabela[i].brasao),
+            title: Text(tabela[i].nome),
+            trailing: Text(tabela[i].pontos.toString()),
+          );
+        }, 
+        separatorBuilder: (context, i)=> Divider(), 
+        itemCount: homeController.tabela.length,
+        padding: EdgeInsets.all(16),
+      )
     );
   }
 }
