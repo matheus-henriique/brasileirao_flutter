@@ -31,14 +31,14 @@ class _HomePageState extends State<HomePage>{
         backgroundColor: Colors.purple,
       ),
       body: ListView.separated(
-        itemBuilder: (BuildContext context, int i){
+        itemBuilder: (BuildContext context, int time){
           final List<Time> tabela = HomeController().tabela;
 
           return ListTile(
-            leading: Image.network(tabela[i].brasao),
-            title: Text(tabela[i].nome),
-            trailing: Text(tabela[i].pontos.toString()),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TimePage(time: tabela[i]))),
+            leading: Image.network(tabela[time].brasao),
+            title: Text(tabela[time].nome),
+            trailing: Text(tabela[time].pontos.toString()),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TimePage(key: Key(tabela[time].nome), time: tabela[time]))),
           );
         }, 
         separatorBuilder: (context, i)=> Divider(), 
