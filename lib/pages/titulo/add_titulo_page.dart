@@ -31,5 +31,62 @@ class _AddTituloPageState extends State<AddTituloPage>{
             },
           ),
       ),
+      body: Form(
+        key: _formKey, 
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(padding: EdgeInsets.all(24),
+            child: TextFormField(
+              controller: _ano,
+              decoration: InputDecoration(
+                labelText: "Ano",
+                border: OutlineInputBorder()
+              ),
+              keyboardType: TextInputType.number,
+              validator: (value){
+                if(value!.isEmpty){
+                  return "Campo obrigatório";
+                }
+                return null;
+              },
+            ),
+            ),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+            child: TextFormField(
+              controller: _campeonato,
+              decoration: InputDecoration(
+                labelText: "Campeonato",
+                border: OutlineInputBorder()
+              ),
+              validator: (value){
+                if(value!.isEmpty){
+                  return "Informe qual o campeonato!";
+                }
+                return null;
+              },
+            ),
+            ),
+            Expanded(child: Container(
+              alignment: Alignment.bottomCenter,
+              padding: EdgeInsets.all(24.0),
+              child: ElevatedButton(
+                onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: widget.time.cor,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(padding: EdgeInsets.all(12.0),
+                    child: Text("Salvar", style: TextStyle(color: Colors.white),),
+                    )
+                  ],
+                ),
+              ),
+            ))
+          ],
+        )),
     );
 }}
