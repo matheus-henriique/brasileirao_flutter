@@ -30,7 +30,7 @@ class TimesRepository {
         nome: 'Atlético-MG',
         pontos: 65,
         brasao: 'https://e.imguol.com/futebol/brasoes/40x40/atletico-mg.png',
-        cor: Colors.red[900],
+        cor: Colors.black,
       ),
     ]);
   }
