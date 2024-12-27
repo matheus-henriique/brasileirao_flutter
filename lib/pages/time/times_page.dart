@@ -26,8 +26,8 @@ class _TimePageState extends State<TimePage>{
     Navigator.pop(context);
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Titulo adicionado com sucesso!"),
-      duration: Duration(seconds: 2),
+      content: Text("Titulo adicionado com sucesso!", style: TextStyle(color: Colors.white),),
+      backgroundColor: Colors.green,
     ));
   }
 
@@ -87,7 +87,7 @@ class _TimePageState extends State<TimePage>{
             : ListView.separated(itemBuilder: (BuildContext context, int index){
               return ListTile(
                 leading: Icon(Icons.emoji_events),
-                title: Text(widget.time.titulos[index].campenato),
+                title: Text(widget.time.titulos[index].campeonato),
                 trailing: Text(widget.time.titulos[index].ano.toString()),
               );
             }, separatorBuilder: (context, i)=>Divider(), itemCount: quantidade);

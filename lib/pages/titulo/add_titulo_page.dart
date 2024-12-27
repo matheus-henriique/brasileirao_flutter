@@ -72,14 +72,21 @@ class _AddTituloPageState extends State<AddTituloPage>{
               alignment: Alignment.bottomCenter,
               padding: EdgeInsets.all(24.0),
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  if(_formKey.currentState?.validate() == true){
+                    widget.onSave(Titulo(
+                      campeonato: _campeonato.text,
+                      ano: _ano.text
+                    )); 
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: widget.time.cor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(padding: EdgeInsets.all(12.0),
+                    Padding(padding: EdgeInsets.all(16.0),
                     child: Text("Salvar", style: TextStyle(color: Colors.white),),
                     )
                   ],

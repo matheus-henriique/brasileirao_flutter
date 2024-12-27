@@ -1,6 +1,6 @@
 class Titulo {
-  String campenato;
+  String campeonato;
   String ano;
 
-  Titulo({required this.campenato, required this.ano});
+  Titulo({required this.campeonato, required this.ano});
 }
