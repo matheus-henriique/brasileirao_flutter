@@ -1,12 +1,14 @@
 import 'package:app_test_build/models/time.dart';
 import 'package:app_test_build/models/titulo.dart';
+import 'package:app_test_build/repositories/times_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class AddTituloPage extends StatefulWidget {
   Time time;
-  ValueChanged<Titulo> onSave;
 
-  AddTituloPage({Key? key, required this.time, required this.onSave}) : super(key: key);
+  AddTituloPage({Key? key, required this.time}) : super(key: key);
 
   @override
   _AddTituloPageState createState() => _AddTituloPageState();
@@ -16,6 +18,20 @@ class _AddTituloPageState extends State<AddTituloPage>{
   final _campeonato = TextEditingController();
   final _ano = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  save() {
+    Provider.of<TimesRepository>(context, listen: false).addTitulos(
+      widget.time,
+      Titulo(
+        campeonato: _campeonato.text,
+        ano: _ano.text
+      )
+    );
+
+    Navigator.pop(context);
+
+    Get.snackbar('Sucesso!', "Titulo adicionado",);
+  }
 
   @override
   Widget build(BuildContext context){
@@ -27,7 +43,7 @@ class _AddTituloPageState extends State<AddTituloPage>{
          leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.white), // Ícone customizado
             onPressed: () {
-              Navigator.of(context).pop(); // Voltar para a tela anterior
+              Get.back();// Voltar para a tela anterior
             },
           ),
       ),
@@ -74,10 +90,7 @@ class _AddTituloPageState extends State<AddTituloPage>{
               child: ElevatedButton(
                 onPressed: (){
                   if(_formKey.currentState?.validate() == true){
-                    widget.onSave(Titulo(
-                      campeonato: _campeonato.text,
-                      ano: _ano.text
-                    )); 
+                    save();
                   }
                 },
                 style: ElevatedButton.styleFrom(
