@@ -1,6 +1,7 @@
 import 'package:app_test_build/models/titulo.dart';
 import 'package:app_test_build/pages/titulo/edit_titulo_page.dart';
 import 'package:app_test_build/repositories/times_repository.dart';
+import 'package:app_test_build/widgets/brasao.dart';
 import 'package:flutter/material.dart';
 import 'package:app_test_build/models/time.dart';
 import 'package:app_test_build/pages/titulo/add_titulo_page.dart';
@@ -55,8 +56,11 @@ class _TimePageState extends State<TimePage>{
               children: [
                 Padding(
                   padding: EdgeInsets.all(24), 
-                  child: Image.network(widget.time.brasao.replaceAll("40x40", "100x100"),
-                )),
+                  child: Brasao( 
+                    image:  widget.time.brasao,
+                    width: 100,
+                  ),
+                ),
                 Text(
                   "Pontos: ${widget.time.pontos}", 
                   style: TextStyle(fontSize: 24),

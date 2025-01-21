@@ -2,6 +2,7 @@ import 'package:app_test_build/models/time.dart';
 import 'package:app_test_build/pages/home/home_controller.dart';
 import 'package:app_test_build/pages/time/times_page.dart';
 import 'package:app_test_build/repositories/times_repository.dart';
+import 'package:app_test_build/widgets/brasao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,7 +46,10 @@ class _HomePageState extends State<HomePage>{
               final List<Time> tabela = repository.times;
           
               return ListTile(
-                leading: Image.network(tabela[time].brasao),
+                leading: Brasao( 
+                  image: tabela[time].brasao,
+                  width: 40,
+                ),
                 title: Text(tabela[time].nome),
                 subtitle: Text('Titulos: ${tabela[time].titulos.length}'),
                 trailing: Text(tabela[time].pontos.toString()),
