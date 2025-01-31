@@ -1,67 +1,54 @@
 import 'package:app_test_build/models/time.dart';
-import 'package:app_test_build/pages/home/home_controller.dart';
 import 'package:app_test_build/pages/time/times_page.dart';
 import 'package:app_test_build/repositories/times_repository.dart';
 import 'package:app_test_build/widgets/brasao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
+  final dynamic title;
+
   const HomePage({super.key, required this.title});
 
-  final String title;
-
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage>{
-  late HomeController homeController;
-
-  @override
-  void initState(){
-    super.initState();
-    homeController = HomeController();
-  }
-
-  @override
-  Widget build(BuildContext context0){
+  Widget build(BuildContext context) {
+    final controller = Get.put(TimesRepository());
     return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.light
+        appBar: AppBar(
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
+          title: Center(
+            child: Text(
+              "Brasileirão",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          backgroundColor: Colors.purple,
         ),
-        title: Center(
-          child: Text("Brasileirão", textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),
-        ),
-        backgroundColor: Colors.purple,
-      ),
-      body: Consumer<TimesRepository>(
-        builder: (context, repository, child) {
+        body: Obx(() {
           return ListView.separated(
-            itemCount: repository.times.length,
-            itemBuilder: (BuildContext context, int time){
-              final List<Time> tabela = repository.times;
-          
+            itemCount: controller.times.length,
+            itemBuilder: (BuildContext context, int time) {
               return ListTile(
-                leading: Brasao( 
-                  image: tabela[time].brasao,
-                  width: 40,
-                ),
-                title: Text(tabela[time].nome),
-                subtitle: Text('Titulos: ${tabela[time].titulos.length}'),
-                trailing: Text(tabela[time].pontos.toString()),
-                onTap: () {
-                  Get.to(() => TimePage(key: Key(tabela[time].nome), time: tabela[time]));
-              });
-            }, 
-            separatorBuilder: (context, i)=> Divider(), 
+                  leading: Brasao(
+                    image: controller.times[time].brasao,
+                    width: 40,
+                  ),
+                  title: Text(controller.times[time].nome),
+                  subtitle:
+                      Text('Titulos: ${controller.times[time].titulos.length}'),
+                  trailing: Text(controller.times[time].pontos.toString()),
+                  onTap: () {
+                    Get.to(() => TimePage(
+                        key: Key(controller.times[time].nome),
+                        time: controller.times[time]));
+                  });
+            },
+            separatorBuilder: (context, i) => Divider(),
             padding: EdgeInsets.all(16),
           );
-        },
-      )
-    );
+        }));
   }
 }
